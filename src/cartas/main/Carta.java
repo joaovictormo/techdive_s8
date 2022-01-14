@@ -5,15 +5,15 @@ import cartas.enums.Naipe;
 
 public class Carta {
 
-  private String naipe;
-  private String face;
+  private Naipe naipe;
+  private Face face;
 
-  public Carta(String naipe, String face) {
+  public Carta(Naipe naipe, Face face) {
     this.face = face;
     this.naipe = naipe;
   }
 
   public String toString() {
-    return face + " de " + naipe;
+    return face.getValor() + " de " + naipe;
   }
 }

@@ -5,9 +5,9 @@ import banco.exceptions.SaldoInsuficienteException;
 public class Conta {
   double saldo;
 
-  public Conta(double saldoInicial) throws Exception {
+  public Conta(double saldoInicial) throws IllegalArgumentException {
     if (saldoInicial <= 0) {
-      throw new Exception("saldo inicial não pode ser zero nem negativo.");
+      throw new IllegalArgumentException("saldo inicial não pode ser zero nem negativo.");
     }
     this.saldo = saldoInicial;
   }

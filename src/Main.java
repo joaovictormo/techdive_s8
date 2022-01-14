@@ -7,12 +7,66 @@ import banco.*;
 import banco.exceptions.SaldoInsuficienteException;
 import cartas.enums.Face;
 import cartas.enums.Naipe;
+import cartas.main.Baralho;
 import cartas.main.Carta;
 
-
 public class Main {
+
+  private static final int NUMERO_DE_JOGADORES = 4;
+
   public static void main(String[] args) {
 
+    // inicio teste baralho
+
+    Baralho baralho = new Baralho();
+    baralho.embaralhar();
+
+    String formato = "%-19s";
+
+    for (int i = 1; i <= NUMERO_DE_JOGADORES; i++) {
+      System.out.printf(formato, "Jogador " + i);
+    }
+
+    System.out.println();
+
+    for (int i = 1; i <= Baralho.NUMERO_DE_CARTAS; i++) {
+      System.out.printf(formato, baralho.darUmaCarta());
+
+      if (i % 4 == 0) {
+        System.out.println();
+      }
+    }
+
+    // fim teste baralho
+
+    //inicio teste conta corrente
+
+    Scanner input = new Scanner(System.in);
+    boolean repetir = true;
+
+    do {
+      try {
+        System.out.println("Insira nome:");
+        String nome = input.nextLine();
+        System.out.println("Insira sobrenome:");
+        String sobrenome = input.nextLine();
+        System.out.println("Insira saldo inicial:");
+        double saldoInicial = Double.parseDouble(input.nextLine());
+        System.out.println("Insira limite inicial:");
+        double limiteInicial = Double.parseDouble(input.nextLine());
+
+        ContaCorrente cc = new ContaCorrente(nome, sobrenome, saldoInicial, limiteInicial);
+
+        repetir = false;
+      } catch(NumberFormatException numberFormatException) {
+        System.err.printf("Ocorreu um erro: Insira um número válido. %s%n", numberFormatException.getMessage());
+      } catch(IllegalArgumentException illegalArgumentException) {
+        System.err.printf("Ocorreu um erro: %s%n", illegalArgumentException.getMessage());
+      }
+    } while (repetir);
+
+    // fim teste conta corrente
+/*
     try {
       lerArquivo("arquivo");
     } catch (FileNotFoundException e) {
@@ -38,9 +92,7 @@ public class Main {
 
     System.out.println(meuArrayBidi[0][1]);
     System.out.println(meuArrayBidi[1][0]);
-
-    Scanner input = new Scanner(System.in);
-    boolean repetir = true;
+    */
 
     /*try {
       do {
@@ -68,7 +120,7 @@ public class Main {
       input.close();
     }*/
 
-    Conta conta = null;
+    /*Conta conta = null;
 
     Conta conta2 = null;
 
@@ -127,7 +179,7 @@ public class Main {
       } catch (Exception e) {
         System.err.println(e.getMessage());
       }
-    } while (repetir);
+    } while (repetir);*/
 
   }
 

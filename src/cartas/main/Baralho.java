@@ -1,5 +1,8 @@
 package cartas.main;
 
+import cartas.enums.Face;
+import cartas.enums.Naipe;
+
 import java.util.Random;
 
 public class Baralho {
@@ -13,12 +16,33 @@ public class Baralho {
     this.deque = new Carta[NUMERO_DE_CARTAS];
     this.cartaTopo = 0;
 
-    String[] faces = {"A", "2", "3", "4", "5", "6", "7",
-        "8", "9", "10", "J", "Q", "K"};
-    String[] naipes = {"COPAS", "OUROS", "ESPADAS", "PAUS"};
+    Face[] faces = Face.values();
+    Naipe[] naipes = Naipe.values();
 
     for (int i = 0; i < deque.length; i++) {
       deque[i] = new Carta(naipes[i / faces.length], faces[i % faces.length]);
     }
+  }
+
+  public void embaralhar() {
+    this.cartaTopo = 0;
+
+    for (int i = 0; i < deque.length; i++) {
+      int j = random.nextInt(NUMERO_DE_CARTAS);
+
+      Carta temp = deque[i];
+      deque[i] = deque[j];
+      deque[j] = temp;
+    }
+  }
+
+  public Carta darUmaCarta() {
+    Carta carta = null;
+
+    if (this.cartaTopo < this.deque.length) {
+      carta = this.deque[cartaTopo++];
+    }
+
+    return carta;
   }
 }
